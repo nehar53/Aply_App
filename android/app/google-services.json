@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1053902333494",
+    "project_id": "aply-dc54e",
+    "storage_bucket": "aply-dc54e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1053902333494:android:e59641369e1e0285865a97",
+        "android_client_info": {
+          "package_name": "com.example.aply_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1053902333494-9sahup9q2r2i2u81lrm38pin499u2rtf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvmlw_L_DV7Kxqr7TNndIR12Kl7arpcOk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1053902333494-9sahup9q2r2i2u81lrm38pin499u2rtf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
