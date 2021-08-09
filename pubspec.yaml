@@ -31,7 +31,10 @@ dependencies:
   cupertino_icons: ^1.0.2
   firebase_core: ^1.4.0 
   firebase_auth: ^3.0.1
-  fluttertoast: ^7.1.6
+  firebase_storage: ^10.0.1  
+  flutter_document_picker: ^4.0.1 
+  
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -69,10 +72,7 @@ flutter:
   #       - asset: fonts/Schyler-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-  fonts:
-    - family: Lato
-      fonts:
-        - asset: assets/fonts/Lato-Light.ttf
+  
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
   #

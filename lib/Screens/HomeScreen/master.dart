@@ -4,6 +4,7 @@ import 'package:aply_app/Screens/HomeScreen/jobs.dart';
 import 'package:flutter/material.dart';
 
 class Master extends StatefulWidget {
+  static const routeArgs = '/home-screen';
   @override
   _MasterState createState() => _MasterState();
 }

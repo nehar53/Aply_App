@@ -1,5 +1,7 @@
+import 'package:aply_app/Screens/authScreen/authScreen.dart';
 import 'package:aply_app/Screens/HomeScreen/data.dart';
 import 'package:aply_app/Screens/HomeScreen/job_detail.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class Jobs extends StatefulWidget {
@@ -9,7 +11,7 @@ class Jobs extends StatefulWidget {
 
 class _JobsState extends State<Jobs> {
   List<Job> jobs = getJobs();
-
+  final _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -32,10 +34,19 @@ class _JobsState extends State<Jobs> {
                   SizedBox(
                     width: 24,
                   ),
-                  Icon(
-                    Icons.filter_list,
-                    size: 28,
-                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.logout,
+                      size: 28,
+                    ),
+                    onPressed: () async {
+                      await _auth.signOut();
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => LoginScreen()));
+                    },
+                  )
                 ],
               ),
             ],

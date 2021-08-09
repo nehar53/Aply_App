@@ -1,13 +1,23 @@
 import 'package:aply_app/Screens/HomeScreen/master.dart';
-import 'package:aply_app/Screens/Screens/register/register.dart';
-import 'package:aply_app/Screens/components/background.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
-  TextEditingController _email = TextEditingController();
-  TextEditingController _password = TextEditingController();
-  final auth = FirebaseAuth.instance;
+import 'package:aply_app/components/background.dart';
+
+import 'package:flutter/material.dart';
+import 'package:flutter_document_picker/flutter_document_picker.dart';
+import 'dart:io';
+import 'dart:math';
+
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
+class HomePage extends StatefulWidget {
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  TextEditingController _name = TextEditingController();
+  TextEditingController _phonenumber = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -21,11 +31,11 @@ class LoginScreen extends StatelessWidget {
               alignment: Alignment.centerLeft,
               padding: EdgeInsets.symmetric(horizontal: 40),
               child: Text(
-                "LOGIN",
+                "Upload Documents to Complete your KYC",
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     color: Color(0xFF2661FA),
-                    fontSize: 36),
+                    fontSize: 26),
                 textAlign: TextAlign.left,
               ),
             ),
@@ -34,9 +44,9 @@ class LoginScreen extends StatelessWidget {
                 alignment: Alignment.center,
                 margin: EdgeInsets.symmetric(horizontal: 40),
                 child: TextFormField(
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(labelText: "Email"),
-                  controller: _email,
+                  keyboardType: TextInputType.name,
+                  decoration: InputDecoration(labelText: "Name"),
+                  controller: _name,
                   validator: (value) {
                     if (value.isEmpty) {
                       return 'Enter Email Id';
@@ -49,9 +59,8 @@ class LoginScreen extends StatelessWidget {
               alignment: Alignment.center,
               margin: EdgeInsets.symmetric(horizontal: 40),
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Password"),
-                obscureText: true,
-                controller: _password,
+                decoration: InputDecoration(labelText: "Phone Number"),
+                controller: _phonenumber,
                 validator: (value) {
                   if (value.isEmpty) {
                     return 'Enter your password';
@@ -60,29 +69,18 @@ class LoginScreen extends StatelessWidget {
                 },
               ),
             ),
-            Container(
-              alignment: Alignment.centerRight,
-              margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-              child: Text(
-                "Forgot your password?",
-                style: TextStyle(fontSize: 12, color: Color(0XFF2661FA)),
-              ),
-            ),
             SizedBox(height: size.height * 0.05),
             Container(
               alignment: Alignment.centerRight,
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: RaisedButton(
-                onPressed: () {
-                  auth
-                      .signInWithEmailAndPassword(
-                          email: _email.text, password: _password.text)
-                      .then((response) => {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Master()))
-                          });
+                onPressed: () async {
+                  final path = await FlutterDocumentPicker.openDocument();
+                  print(path);
+                  File file = File(path);
+                  firebase_storage.UploadTask task = await uploadFile(file);
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => Master()));
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0)),
@@ -98,33 +96,42 @@ class LoginScreen extends StatelessWidget {
                           colors: [Colors.blue, Colors.blue[700]])),
                   padding: const EdgeInsets.all(0),
                   child: Text(
-                    "LOGIN",
+                    "Upload Document",
                     textAlign: TextAlign.center,
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
             ),
-            Container(
-              alignment: Alignment.centerRight,
-              margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
-              child: GestureDetector(
-                onTap: () => {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => RegisterScreen()))
-                },
-                child: Text(
-                  "Don't Have an Account? Sign up",
-                  style: TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF2661FA)),
-                ),
-              ),
-            )
           ],
         ),
       ),
     );
+  }
+
+  Future<firebase_storage.UploadTask> uploadFile(File file) async {
+    if (file == null) {
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text("Unable to Upload")));
+      return null;
+    }
+
+    firebase_storage.UploadTask uploadTask;
+
+    // Create a Reference to the file
+    firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('cv')
+        .child('/resume.pdf');
+
+    final metadata = firebase_storage.SettableMetadata(
+        contentType: 'file/pdf',
+        customMetadata: {'picked-file-path': file.path});
+    print("Uploading..!");
+
+    uploadTask = ref.putData(await file.readAsBytes(), metadata);
+
+    print("done..!");
+    return Future.value(uploadTask);
   }
 }

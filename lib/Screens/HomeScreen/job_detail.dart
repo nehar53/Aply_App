@@ -162,6 +162,7 @@ class JobDetail extends StatelessWidget {
                     width: 16,
                   ),
                   Expanded(
+                    
                     child: Container(
                       height: 60,
                       decoration: BoxDecoration(
@@ -178,8 +179,10 @@ class JobDetail extends StatelessWidget {
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
                           ),
+                          
                         ),
                       ),
+                      
                     ),
                   ),
                 ],

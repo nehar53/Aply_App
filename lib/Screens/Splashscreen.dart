@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:aply_app/Screens/Screens/Onboarding/pages/intro_page.dart';
-import 'package:aply_app/Screens/Screens/register/register.dart';
 import 'package:flutter/material.dart';
+
+import 'Auth/verify.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => RegisterScreen())));
+            MaterialPageRoute(builder: (context) => InitializerWidget())));
   }
 
   @override
