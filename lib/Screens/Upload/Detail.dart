@@ -9,7 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_document_picker/flutter_document_picker.dart';
+
 import 'dart:io';
 import 'dart:math';
 
@@ -26,10 +26,12 @@ class _DetailsPageState extends State<DetailsPage> {
   TextEditingController _Email = TextEditingController();
   TextEditingController _address = TextEditingController();
   TextEditingController _dob = TextEditingController();
+
   final DBRef = FirebaseDatabase.instance.reference().child('Users');
   final Future<FirebaseApp> _future = Firebase.initializeApp();
   var firebaseUser = FirebaseAuth.instance.currentUser;
   final firestoreInstance = FirebaseFirestore.instance;
+
   void addData(String _name, String _address, String _Email, String _dob,
       String _phonenumber) {
     firestoreInstance
@@ -40,7 +42,7 @@ class _DetailsPageState extends State<DetailsPage> {
           'DOB': _dob,
           'email': _Email,
           'Address': _address,
-          'Phone Number': _phonenumber
+          'Phone Number': _phonenumber,
         })
         .then((value) => showSnackBar(
             'Details Uploaded Successfully!', context, Colors.green))
@@ -251,14 +253,6 @@ class _DetailsPageState extends State<DetailsPage> {
                             EdgeInsets.symmetric(horizontal: 40, vertical: 10),
                         child: RaisedButton(
                           onPressed: () async {
-                            //  final path = await FlutterDocumentPicker.openDocument();
-                            //    print(path);
-                            //     File file = File(path);
-                            //    firebase_storage.UploadTask task = await uploadFile(file);
-
-                            // Navigator.push(context,
-                            //     MaterialPageRoute(builder: (context) => Master()));
-
                             addData(_name.text, _address.text, _Email.text,
                                 _dob.text, _phonenumber.text);
                           },
@@ -276,7 +270,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                     colors: [Colors.blue, Colors.blue[700]])),
                             padding: const EdgeInsets.all(0),
                             child: Text(
-                              "Next",
+                              "Submit Details",
                               textAlign: TextAlign.center,
                               style: TextStyle(fontWeight: FontWeight.bold),
                             ),

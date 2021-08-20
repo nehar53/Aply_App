@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:aply_app/Screens/Onboarding/OnBoarding.dart';
 import 'package:flutter/material.dart';
 
-import 'Auth/verify.dart';
+import 'Auth/Initialize.dart';
 
 class SplashScreen extends StatefulWidget {
   @override
@@ -16,8 +16,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         Duration(seconds: 3),
-        () => Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => AuthScreeeen())));
+        () => Navigator.pushReplacement(context,
+            MaterialPageRoute(builder: (context) => OnboardingScreen())));
   }
 
   @override

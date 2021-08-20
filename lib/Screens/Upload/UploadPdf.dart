@@ -9,6 +9,9 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+//Yha upload Screen bnani h which have two fields ADhar card and Resume
+//UID bhi honi chahiye
+//next screen will Completed success screen
 
 class UploadDocumentsPage extends StatefulWidget {
   @override

@@ -1,11 +1,11 @@
 import 'package:aply_app/Screens/Auth/authScreen.dart';
-import 'package:aply_app/Screens/Auth/verify.dart';
+import 'package:aply_app/Screens/Auth/Initialize.dart';
 import 'package:aply_app/Screens/Upload/Detail.dart';
 import 'package:aply_app/components/constant.dart';
 import 'package:flutter/material.dart';
 
-class AuthScreeeen extends StatelessWidget {
-  const AuthScreeeen({Key key}) : super(key: key);
+class OnboardingScreen extends StatelessWidget {
+  const OnboardingScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +29,10 @@ class AuthScreeeen extends StatelessWidget {
                 margin: EdgeInsets.all(10),
                 child: RaisedButton(
                   onPressed: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) => DetailsPage()));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => InitializerWidget()));
                   },
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(80.0)),
