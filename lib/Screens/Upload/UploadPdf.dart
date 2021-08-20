@@ -1,6 +1,7 @@
 import 'package:aply_app/Screens/HomeScreen/master.dart';
 
 import 'package:aply_app/components/background.dart';
+import 'package:aply_app/components/constant.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_document_picker/flutter_document_picker.dart';
@@ -9,14 +10,14 @@ import 'dart:math';
 
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
-class HomePage extends StatefulWidget {
+class UploadDocumentsPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _UploadDocumentsPageState createState() => _UploadDocumentsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  TextEditingController _name = TextEditingController();
-  TextEditingController _phonenumber = TextEditingController();
+class _UploadDocumentsPageState extends State<UploadDocumentsPage> {
+  TextEditingController _AdharCard = TextEditingController();
+  TextEditingController _Resume = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,32 +42,74 @@ class _HomePageState extends State<HomePage> {
             ),
             SizedBox(height: size.height * 0.03),
             Container(
-                alignment: Alignment.center,
-                margin: EdgeInsets.symmetric(horizontal: 40),
-                child: TextFormField(
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(labelText: "Name"),
-                  controller: _name,
-                  validator: (value) {
-                    if (value.isEmpty) {
-                      return 'Enter Email Id';
-                    }
-                    return null;
-                  },
-                )),
+              alignment: Alignment.center,
+              margin: EdgeInsets.symmetric(horizontal: 20),
+              child: TextFormField(
+                readOnly: true,
+                cursorColor: kBlue,
+                keyboardType: TextInputType.text,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.normal,
+                ),
+                maxLength: 30,
+                decoration: InputDecoration(
+                    counterText: '',
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF009bff)),
+                        borderRadius: BorderRadius.circular(30)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF009bff)),
+                        borderRadius: BorderRadius.circular(30)),
+                    prefixIcon: IconButton(
+                      icon: Icon(Icons.upload_file),
+                      onPressed: () async {
+                        final path = await FlutterDocumentPicker.openDocument();
+                        print(path);
+
+                        File Adharfile = File(path);
+                        firebase_storage.UploadTask task =
+                            await uploadFile(Adharfile);
+                      },
+                      color: kBlue,
+                    ),
+                    hintText: 'Upload your Adhar Card pdf Format'),
+              ),
+            ),
             SizedBox(height: size.height * 0.03),
             Container(
               alignment: Alignment.center,
-              margin: EdgeInsets.symmetric(horizontal: 40),
+              margin: EdgeInsets.symmetric(horizontal: 20),
               child: TextFormField(
-                decoration: InputDecoration(labelText: "Phone Number"),
-                controller: _phonenumber,
-                validator: (value) {
-                  if (value.isEmpty) {
-                    return 'Enter your password';
-                  }
-                  return null;
-                },
+                readOnly: true,
+                cursorColor: kBlue,
+                keyboardType: TextInputType.text,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.normal,
+                ),
+                maxLength: 30,
+                decoration: InputDecoration(
+                    counterText: '',
+                    enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF009bff)),
+                        borderRadius: BorderRadius.circular(30)),
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF009bff)),
+                        borderRadius: BorderRadius.circular(30)),
+                    prefixIcon: IconButton(
+                      icon: Icon(Icons.upload_file),
+                      onPressed: () async {
+                        final path = await FlutterDocumentPicker.openDocument();
+                        print(path);
+
+                        File Resumefile = File(path);
+                        firebase_storage.UploadTask task =
+                            await uploadFile(Resumefile);
+                      },
+                      color: kBlue,
+                    ),
+                    hintText: 'Upload your Resume in pdf Format'),
               ),
             ),
             SizedBox(height: size.height * 0.05),
@@ -75,10 +118,6 @@ class _HomePageState extends State<HomePage> {
               margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
               child: RaisedButton(
                 onPressed: () async {
-                  final path = await FlutterDocumentPicker.openDocument();
-                  print(path);
-                  File file = File(path);
-                  firebase_storage.UploadTask task = await uploadFile(file);
                   Navigator.push(context,
                       MaterialPageRoute(builder: (context) => Master()));
                 },
@@ -121,8 +160,34 @@ class _HomePageState extends State<HomePage> {
     // Create a Reference to the file
     firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
         .ref()
-        .child('cv')
+        .child('Resume')
         .child('/resume.pdf');
+
+    final metadata = firebase_storage.SettableMetadata(
+        contentType: 'file/pdf',
+        customMetadata: {'picked-file-path': file.path});
+    print("Uploading..!");
+
+    uploadTask = ref.putData(await file.readAsBytes(), metadata);
+
+    print("done..!");
+    return Future.value(uploadTask);
+  }
+
+  Future<firebase_storage.UploadTask> uploadFile2(File file) async {
+    if (file == null) {
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text("Unable to Upload")));
+      return null;
+    }
+
+    firebase_storage.UploadTask uploadTask;
+
+    // Create a Reference to the file
+    firebase_storage.Reference ref = firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child('Adhar')
+        .child('/adhar.pdf');
 
     final metadata = firebase_storage.SettableMetadata(
         contentType: 'file/pdf',

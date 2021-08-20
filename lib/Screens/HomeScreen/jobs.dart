@@ -1,4 +1,5 @@
-import 'package:aply_app/Screens/authScreen/authScreen.dart';
+import 'package:aply_app/Screens/Auth/authScreen.dart';
+
 import 'package:aply_app/Screens/HomeScreen/data.dart';
 import 'package:aply_app/Screens/HomeScreen/job_detail.dart';
 import 'package:firebase_auth/firebase_auth.dart';

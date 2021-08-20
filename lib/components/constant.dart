@@ -48,3 +48,64 @@ OutlineInputBorder outlineInputBorder() {
     borderSide: BorderSide(color: kTextColor),
   );
 }
+
+const keTextColor = Color(0xFF0D1333);
+const kBlueColor = Color(0xFF6E8AFA);
+const kBestSellerColor = Color(0xFFFFD073);
+const kGreenColor = Color(0xFF49CC96);
+const kBlue = Color(0xff081029);
+const kRed = Color(0xffAA1110);
+
+const kHeadingextStyle = TextStyle(
+  fontSize: 28,
+  color: kTextColor,
+  fontWeight: FontWeight.bold,
+);
+const kSubheadingextStyle = TextStyle(
+  fontSize: 24,
+  color: Color(0xFF61688B),
+  height: 2,
+);
+
+const kTitleTextStyle = TextStyle(
+  fontSize: 20,
+  color: kTextColor,
+  fontWeight: FontWeight.bold,
+);
+
+const kSubtitleTextStyle = TextStyle(
+  fontSize: 18,
+  color: kTextColor,
+  // fontWeight: FontWeight.bold,
+);
+
+BoxDecoration kTextContainer = BoxDecoration(
+    color: Colors.white54, borderRadius: BorderRadius.all(Radius.circular(20)));
+InputDecoration kTextDeco = InputDecoration(
+  prefixIcon: Icon(
+    Icons.lock,
+    color: kBlue,
+  ),
+  hintText: 'Password',
+  border: OutlineInputBorder(
+    borderSide: BorderSide(color: kBlue, width: 4),
+    borderRadius: BorderRadius.all(
+      Radius.circular(20),
+    ),
+  ),
+  focusedBorder: OutlineInputBorder(
+    borderSide: BorderSide(color: kRed.withOpacity(0.8), width: 4),
+    borderRadius: BorderRadius.all(
+      Radius.circular(20),
+    ),
+  ),
+);
+
+BoxDecoration kBackgroundContainer = BoxDecoration(
+    gradient: LinearGradient(
+        begin: Alignment.bottomRight,
+        end: Alignment.topCenter,
+        colors: [
+      Colors.white.withOpacity(0.1),
+      Colors.white.withOpacity(0.1),
+    ]));

@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:aply_app/Screens/Onboarding/OnBoarding.dart';
 import 'package:flutter/material.dart';
 
 import 'Auth/verify.dart';
@@ -15,8 +16,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         Duration(seconds: 3),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (context) => InitializerWidget())));
+        () => Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (context) => AuthScreeeen())));
   }
 
   @override
@@ -29,7 +30,7 @@ class _SplashScreenState extends State<SplashScreen> {
           gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Colors.white12, Colors.white12]),
+              colors: [Color(0xFFf7f7f7), Color(0xFFf7f7f7)]),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
