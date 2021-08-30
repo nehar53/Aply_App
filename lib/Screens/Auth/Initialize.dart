@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'authScreen.dart';
-import '../Upload/UploadPdf.dart';
 
 class InitializerWidget extends StatefulWidget {
   @override
@@ -19,7 +18,6 @@ class _InitializerWidgetState extends State<InitializerWidget> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _auth = FirebaseAuth.instance;
     _user = _auth.currentUser;
@@ -34,7 +32,7 @@ class _InitializerWidgetState extends State<InitializerWidget> {
               child: CircularProgressIndicator(),
             ),
           )
-        : _user == null
+        : FirebaseAuth.instance.currentUser == null
             ? LoginScreen()
             : DetailsPage();
   }

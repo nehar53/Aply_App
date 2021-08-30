@@ -66,13 +66,17 @@ const kSubheadingextStyle = TextStyle(
   color: Color(0xFF61688B),
   height: 2,
 );
-
+const kSubTextStyle = TextStyle(
+  fontSize: 18.0,
+  color: Colors.black,
+);
+const kFixPadding = 16.0;
 const kTitleTextStyle = TextStyle(
   fontSize: 20,
   color: kTextColor,
   fontWeight: FontWeight.bold,
 );
-
+const kDefaultPadding = 24.0;
 const kSubtitleTextStyle = TextStyle(
   fontSize: 18,
   color: kTextColor,

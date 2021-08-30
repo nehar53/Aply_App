@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:aply_app/Screens/Onboarding/OnBoarding.dart';
 import 'package:flutter/material.dart';
 
-import 'Auth/Initialize.dart';
-
 class SplashScreen extends StatefulWidget {
   @override
   _SplashScreenState createState() => _SplashScreenState();

@@ -1,8 +1,9 @@
-import 'package:aply_app/Screens/HomeScreen/master.dart';
+import 'package:aply_app/Screens/Upload/Detail.dart';
 import 'package:aply_app/components/TextFieldOTP.dart';
 import 'package:aply_app/components/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
+import 'package:sms_autofill/sms_autofill.dart';
 
 enum MobileVerificationState {
   SHOW_MOBILE_FORM_STATE,
@@ -41,6 +42,12 @@ class _LoginScreenState extends State<LoginScreen> {
   final _input5 = FocusNode();
   final _input6 = FocusNode();
 
+  @override
+  void initState() {
+    super.initState();
+    _listenOtp();
+  }
+
   void signInWithPhoneAuthCredential(
       PhoneAuthCredential phoneAuthCredential) async {
     setState(() {
@@ -57,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
       if (authCredential?.user != null) {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => Master()));
+            context, MaterialPageRoute(builder: (context) => DetailsPage()));
       }
     } on FirebaseAuthException catch (e) {
       setState(() {
@@ -328,6 +335,7 @@ class _LoginScreenState extends State<LoginScreen> {
         FlatButton(
           onPressed: () async {
             String otp = input1 + input2 + input3 + input4 + input5 + input6;
+
             PhoneAuthCredential phoneAuthCredential =
                 PhoneAuthProvider.credential(
                     verificationId: verificationId, smsCode: otp);
@@ -360,5 +368,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   : getOtpFormWidget(context),
           padding: const EdgeInsets.all(16),
         ));
+  }
+
+  void _listenOtp() async {
+    await SmsAutoFill().listenForCode;
   }
 }

@@ -1,6 +1,5 @@
-import 'package:aply_app/Screens/Auth/authScreen.dart';
 import 'package:aply_app/Screens/Auth/Initialize.dart';
-import 'package:aply_app/Screens/Upload/Detail.dart';
+
 import 'package:aply_app/components/constant.dart';
 import 'package:flutter/material.dart';
 

@@ -1,14 +1,13 @@
-import 'package:aply_app/Screens/HomeScreen/master.dart';
-
 import 'package:aply_app/components/background.dart';
 import 'package:aply_app/components/constant.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_document_picker/flutter_document_picker.dart';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
+
+import '../Success.dart';
 //Yha upload Screen bnani h which have two fields ADhar card and Resume
 //UID bhi honi chahiye
 //next screen will Completed success screen
@@ -19,9 +18,6 @@ class UploadDocumentsPage extends StatefulWidget {
 }
 
 class _UploadDocumentsPageState extends State<UploadDocumentsPage> {
-  TextEditingController _AdharCard = TextEditingController();
-  TextEditingController _Resume = TextEditingController();
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -122,7 +118,7 @@ class _UploadDocumentsPageState extends State<UploadDocumentsPage> {
               child: RaisedButton(
                 onPressed: () async {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Master()));
+                      MaterialPageRoute(builder: (context) => Success()));
                 },
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(80.0)),
@@ -194,7 +190,7 @@ class _UploadDocumentsPageState extends State<UploadDocumentsPage> {
 
     final metadata = firebase_storage.SettableMetadata(
         contentType: 'file/pdf',
-        customMetadata: {'picked-file-path': file.path});
+        customMetadata: {'picked-file-path2': file.path});
     print("Uploading..!");
 
     uploadTask = ref.putData(await file.readAsBytes(), metadata);
