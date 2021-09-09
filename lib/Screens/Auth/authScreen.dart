@@ -77,6 +77,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   getMobileFormWidget(context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         Spacer(),
@@ -84,18 +85,15 @@ class _LoginScreenState extends State<LoginScreen> {
           width: 200,
           height: 200,
           child: Image.asset(
-            'assets/images/logoo.jpeg',
+            'assets/images/logoo.png',
           ),
-        ),
-        const SizedBox(
-          height: 24,
         ),
         Text('Registration', style: kTitleTextStyle),
         const SizedBox(
           height: 10,
         ),
         Text(
-          "Add your phone number. we'll send you a verification code so we know you're real",
+          "Please enter your phone number for verification",
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
@@ -118,10 +116,10 @@ class _LoginScreenState extends State<LoginScreen> {
               counterText: '',
               enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xFF009bff)),
-                  borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(30)),
               focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Color(0xFF009bff)),
-                  borderRadius: BorderRadius.circular(10)),
+                  borderRadius: BorderRadius.circular(30)),
               prefix: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 8),
                 child: Text(
@@ -140,40 +138,61 @@ class _LoginScreenState extends State<LoginScreen> {
         SizedBox(
           height: 16,
         ),
-        FlatButton(
-          onPressed: () async {
-            setState(() {
-              showLoading = true;
-            });
+        Container(
+          height: 50,
+          alignment: Alignment.center,
+          margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+          child: RaisedButton(
+            onPressed: () async {
+              setState(() {
+                showLoading = true;
+              });
 
-            await _auth.verifyPhoneNumber(
-              phoneNumber: '+91' + phoneController.text,
-              verificationCompleted: (phoneAuthCredential) async {
-                setState(() {
-                  showLoading = false;
-                });
-                //signInWithPhoneAuthCredential(phoneAuthCredential);
-              },
-              verificationFailed: (verificationFailed) async {
-                setState(() {
-                  showLoading = false;
-                });
-                _scaffoldKey.currentState.showSnackBar(
-                    SnackBar(content: Text(verificationFailed.message)));
-              },
-              codeSent: (verificationId, resendingToken) async {
-                setState(() {
-                  showLoading = false;
-                  currentState = MobileVerificationState.SHOW_OTP_FORM_STATE;
-                  this.verificationId = verificationId;
-                });
-              },
-              codeAutoRetrievalTimeout: (verificationId) async {},
-            );
-          },
-          child: Text("SEND"),
-          color: Colors.blue,
-          textColor: Colors.white,
+              await _auth.verifyPhoneNumber(
+                phoneNumber: '+91' + phoneController.text,
+                verificationCompleted: (phoneAuthCredential) async {
+                  setState(() {
+                    showLoading = false;
+                  });
+                  //signInWithPhoneAuthCredential(phoneAuthCredential);
+                },
+                verificationFailed: (verificationFailed) async {
+                  setState(() {
+                    showLoading = false;
+                  });
+                  _scaffoldKey.currentState.showSnackBar(
+                      SnackBar(content: Text(verificationFailed.message)));
+                },
+                codeSent: (verificationId, resendingToken) async {
+                  setState(() {
+                    showLoading = false;
+                    currentState = MobileVerificationState.SHOW_OTP_FORM_STATE;
+                    this.verificationId = verificationId;
+                  });
+                },
+                codeAutoRetrievalTimeout: (verificationId) async {},
+              );
+            },
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(80.0)),
+            textColor: Colors.white,
+            padding: const EdgeInsets.all(0),
+            child: Container(
+              alignment: Alignment.center,
+              height: 50.0,
+              width: size.width * 0.5,
+              decoration: new BoxDecoration(
+                  borderRadius: BorderRadius.circular(80.0),
+                  gradient: new LinearGradient(
+                      colors: [Colors.blue, Colors.blue[700]])),
+              padding: const EdgeInsets.all(0),
+              child: Text(
+                "SEND",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
         ),
         Spacer(),
       ],
@@ -181,6 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   getOtpFormWidget(context) {
+    Size size = MediaQuery.of(context).size;
     return Column(
       children: [
         Spacer(),
@@ -188,7 +208,7 @@ class _LoginScreenState extends State<LoginScreen> {
           width: 200,
           height: 200,
           child: Image.asset(
-            'assets/images/logoo.jpeg',
+            'assets/images/logoo.png',
           ),
         ),
         const SizedBox(
@@ -199,7 +219,7 @@ class _LoginScreenState extends State<LoginScreen> {
           height: 10,
         ),
         Text(
-          "We sent a One Time Password (OTP) to ${phoneController.text}",
+          "Please enter OTP sent to ${phoneController.text}",
           style: TextStyle(
             fontSize: 14,
             fontWeight: FontWeight.bold,
@@ -304,22 +324,43 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ),
-        SizedBox(
-          height: 16,
-        ),
         const SizedBox(
           height: 18,
         ),
-        Text(
-          "Didn't you receive any code?",
-          style: TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.bold,
+        Container(
+          height: 50,
+          alignment: Alignment.center,
+          margin: EdgeInsets.symmetric(horizontal: 40, vertical: 10),
+          child: RaisedButton(
+            onPressed: () async {
+              String otp = input1 + input2 + input3 + input4 + input5 + input6;
+
+              PhoneAuthCredential phoneAuthCredential =
+                  PhoneAuthProvider.credential(
+                      verificationId: verificationId, smsCode: otp);
+
+              signInWithPhoneAuthCredential(phoneAuthCredential);
+            },
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(80.0)),
+            textColor: Colors.white,
+            padding: const EdgeInsets.all(0),
+            child: Container(
+              alignment: Alignment.center,
+              height: 50.0,
+              width: size.width * 0.5,
+              decoration: new BoxDecoration(
+                  borderRadius: BorderRadius.circular(80.0),
+                  gradient: new LinearGradient(
+                      colors: [Colors.blue, Colors.blue[700]])),
+              padding: const EdgeInsets.all(0),
+              child: Text(
+                "VERIFY",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
           ),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(
-          height: 18,
         ),
         SelectableText(
           "Resend New Code",
@@ -327,24 +368,8 @@ class _LoginScreenState extends State<LoginScreen> {
             Navigator.of(context).pop();
           },
           style: TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
-          ),
+              fontSize: 14, fontWeight: FontWeight.bold, color: Colors.grey),
           textAlign: TextAlign.center,
-        ),
-        FlatButton(
-          onPressed: () async {
-            String otp = input1 + input2 + input3 + input4 + input5 + input6;
-
-            PhoneAuthCredential phoneAuthCredential =
-                PhoneAuthProvider.credential(
-                    verificationId: verificationId, smsCode: otp);
-
-            signInWithPhoneAuthCredential(phoneAuthCredential);
-          },
-          child: Text("VERIFY"),
-          color: Colors.blue,
-          textColor: Colors.white,
         ),
         Spacer(),
       ],
@@ -356,6 +381,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.white,
         key: _scaffoldKey,
         resizeToAvoidBottomInset: false,
         body: Container(

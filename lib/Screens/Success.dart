@@ -32,9 +32,9 @@ class _SuccessState extends State<Success> {
             margin: EdgeInsets.all(10),
             child: RaisedButton(
               onPressed: () {
-                _signOut();
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (context) => LoginScreen()));
+                // _signOut();
+                //  Navigator.pushReplacement(context,
+                //      MaterialPageRoute(builder: (context) => LoginScreen()));
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(80.0)),
@@ -51,7 +51,7 @@ class _SuccessState extends State<Success> {
                   constraints: BoxConstraints(maxWidth: 150.0, minHeight: 50.0),
                   alignment: Alignment.center,
                   child: Text(
-                    "Sign Out",
+                    "okay",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 15),
                   ),

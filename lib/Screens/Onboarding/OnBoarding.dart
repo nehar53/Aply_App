@@ -24,7 +24,7 @@ class OnboardingScreen extends StatelessWidget {
                 height: 560,
               ),
               Container(
-                height: 60.0,
+                height: 50.0,
                 margin: EdgeInsets.all(10),
                 child: RaisedButton(
                   onPressed: () {

@@ -72,8 +72,8 @@ const kSubTextStyle = TextStyle(
 );
 const kFixPadding = 16.0;
 const kTitleTextStyle = TextStyle(
-  fontSize: 20,
-  color: kTextColor,
+  fontSize: 30,
+  color: Colors.black,
   fontWeight: FontWeight.bold,
 );
 const kDefaultPadding = 24.0;

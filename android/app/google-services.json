@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "1053902333494",
-    "project_id": "aply-dc54e",
-    "storage_bucket": "aply-dc54e.appspot.com"
+    "project_number": "390263346928",
+    "project_id": "aply-e30a0",
+    "storage_bucket": "aply-e30a0.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1053902333494:android:e59641369e1e0285865a97",
+        "mobilesdk_app_id": "1:390263346928:android:06d528f54bf23458125435",
         "android_client_info": {
-          "package_name": "com.example.aply_app"
+          "package_name": "com.hireat.aply"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1053902333494-9sahup9q2r2i2u81lrm38pin499u2rtf.apps.googleusercontent.com",
+          "client_id": "390263346928-kjuf4m865ahgkm4d0qqm1mjejur9c40j.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDvmlw_L_DV7Kxqr7TNndIR12Kl7arpcOk"
+          "current_key": "AIzaSyDeIPpfRzi4veDUupDBIY1v9AV0Iyp0nfA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1053902333494-9sahup9q2r2i2u81lrm38pin499u2rtf.apps.googleusercontent.com",
+              "client_id": "390263346928-kjuf4m865ahgkm4d0qqm1mjejur9c40j.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

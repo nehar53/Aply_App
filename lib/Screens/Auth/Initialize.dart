@@ -21,6 +21,7 @@ class _InitializerWidgetState extends State<InitializerWidget> {
     super.initState();
     _auth = FirebaseAuth.instance;
     _user = _auth.currentUser;
+    // print(_user.uid);
     isLoading = false;
   }
 

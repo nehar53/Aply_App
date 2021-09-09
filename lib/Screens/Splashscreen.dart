@@ -28,7 +28,7 @@ class _SplashScreenState extends State<SplashScreen> {
           gradient: LinearGradient(
               begin: Alignment.topRight,
               end: Alignment.bottomLeft,
-              colors: [Color(0xFFf7f7f7), Color(0xFFf7f7f7)]),
+              colors: [Colors.white, Colors.white]),
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,9 +37,9 @@ class _SplashScreenState extends State<SplashScreen> {
             Column(
               children: [
                 Image.asset(
-                  "assets/images/logoo.jpeg",
-                  height: 100.0,
-                  width: 100.0,
+                  "assets/images/logoo.png",
+                  height: 200.0,
+                  width: 200.0,
                 ),
               ],
             ),
