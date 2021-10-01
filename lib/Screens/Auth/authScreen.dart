@@ -3,7 +3,6 @@ import 'package:aply_app/components/TextFieldOTP.dart';
 import 'package:aply_app/components/constant.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
-import 'package:sms_autofill/sms_autofill.dart';
 
 enum MobileVerificationState {
   SHOW_MOBILE_FORM_STATE,
@@ -43,11 +42,6 @@ class _LoginScreenState extends State<LoginScreen> {
   final _input6 = FocusNode();
 
   @override
-  void initState() {
-    super.initState();
-    _listenOtp();
-  }
-
   void signInWithPhoneAuthCredential(
       PhoneAuthCredential phoneAuthCredential) async {
     setState(() {
@@ -365,7 +359,8 @@ class _LoginScreenState extends State<LoginScreen> {
         SelectableText(
           "Resend New Code",
           onTap: () {
-            Navigator.of(context).pop();
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => LoginScreen()));
           },
           style: TextStyle(
               fontSize: 14, fontWeight: FontWeight.bold, color: Colors.grey),
@@ -394,9 +389,5 @@ class _LoginScreenState extends State<LoginScreen> {
                   : getOtpFormWidget(context),
           padding: const EdgeInsets.all(16),
         ));
-  }
-
-  void _listenOtp() async {
-    await SmsAutoFill().listenForCode;
   }
 }

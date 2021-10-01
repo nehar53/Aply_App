@@ -1,3 +1,4 @@
+import 'package:aply_app/Screens/Success.dart';
 import 'package:aply_app/Screens/Upload/UploadPdf.dart';
 import 'package:aply_app/components/SnackBar.dart';
 
@@ -254,6 +255,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             valueColor: AlwaysStoppedAnimation<Color>(
                                 Colors.blueAccent),
                           );
+
                           if (_name.text == '' ||
                               _address.text == '' ||
                               _email.text == '' ||

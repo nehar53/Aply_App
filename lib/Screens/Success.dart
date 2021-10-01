@@ -1,7 +1,5 @@
-import 'package:aply_app/Screens/Auth/authScreen.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 import '../components/EmptySection.dart';
 import '../components/SubTitle.dart';
 
@@ -22,19 +20,19 @@ class _SuccessState extends State<Success> {
         children: [
           EmptySection(
             emptyImg: 'assets/images/success.gif',
-            emptyMsg: 'Successful !!',
+            emptyMsg: '',
           ),
           SubTitle(
-            subTitleText: 'Your Details are Uploaded Successfully',
+            subTitleText:
+                'Your documents are uploaded successfully Click down below to\ncomplete your Profile',
           ),
           Container(
             height: 50.0,
             margin: EdgeInsets.all(10),
             child: RaisedButton(
               onPressed: () {
-                // _signOut();
-                //  Navigator.pushReplacement(context,
-                //      MaterialPageRoute(builder: (context) => LoginScreen()));
+                const url = 'https://aply.link/terms-of-service/';
+                launch(url);
               },
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(80.0)),
@@ -48,10 +46,10 @@ class _SuccessState extends State<Success> {
                     ),
                     borderRadius: BorderRadius.circular(30.0)),
                 child: Container(
-                  constraints: BoxConstraints(maxWidth: 150.0, minHeight: 50.0),
+                  constraints: BoxConstraints(maxWidth: 170.0, minHeight: 50.0),
                   alignment: Alignment.center,
                   child: Text(
-                    "okay",
+                    "Complete your profile",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.white, fontSize: 15),
                   ),
@@ -62,9 +60,5 @@ class _SuccessState extends State<Success> {
         ],
       ),
     );
-  }
-
-  Future<void> _signOut() async {
-    await FirebaseAuth.instance.signOut();
   }
 }

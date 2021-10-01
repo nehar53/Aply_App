@@ -4,7 +4,7 @@ import 'package:aply_app/components/SnackBar.dart';
 import 'package:flutter/material.dart';
 
 import 'dart:io';
-import 'dart:math';
+
 import 'package:file_picker/file_picker.dart';
 import 'package:path/path.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
